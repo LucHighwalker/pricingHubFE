@@ -1,0 +1,11 @@
+{
+  "name": "pricingHubFE",
+  "jsx": true,
+  "componentPath": "src/components",
+  "componentFolders": true,
+  "styleExt": "scss",
+  "redux": true,
+  "reduxPath": "src/redux",
+  "actionPath": "actions",
+  "reducerPath": "reducers"
+}
