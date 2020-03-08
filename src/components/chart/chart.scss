@@ -2,3 +2,10 @@
 	padding: 50px;
 	min-height: 500px;
 }
+
+.competitor_selector {
+	position: sticky;
+	top: 75px;
+	z-index: 200;
+	margin-bottom: 20px;
+}

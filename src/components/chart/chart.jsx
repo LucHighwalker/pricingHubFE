@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import "./chart.scss";
 
 import { Line } from "react-chartjs-2";
+import { DropdownButton, Dropdown } from "react-bootstrap";
 
 class Chart extends Component {
   constructor(props) {
@@ -10,31 +11,67 @@ class Chart extends Component {
 
     this.state = {
       current: "",
-      data: {}
+      data: {},
+      competitors: []
     };
   }
 
-  componentDidMount() {
+  getCompetitorList() {
+    fetch("http://127.0.0.1:4200/prices/competitor_list/")
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        this.setState({ competitors: res.competitor });
+      });
+  }
+
+  updateData(comp) {
     const data = {
       title: {
         text: "Prices over time"
       },
       datasets: []
     };
-    fetch("http://127.0.0.1:4200/prices/competitor")
+    fetch(`http://127.0.0.1:4200/prices/competitor/${comp}`)
       .then(res => {
         return res.json();
       })
       .then(res => {
         data.datasets = res.competitor;
-        console.log(data);
-        this.setState({ data });
+        this.setState({ data, current: comp });
       });
+  }
+
+  componentDidMount() {
+    this.updateData(this.state.current);
+    this.getCompetitorList();
   }
 
   render() {
     return (
       <div className="chart">
+        <DropdownButton
+          className="competitor_selector"
+          id="dropdown-item-button"
+          title={this.state.current || "select competitor"}
+        >
+          <Dropdown.Item as="button" onClick={() => this.updateData("")}>
+            Show all
+          </Dropdown.Item>
+          <Dropdown.Divider />
+          {this.state.competitors.map((c, i) => {
+            return (
+              <Dropdown.Item
+                key={i}
+                as="button"
+                onClick={() => this.updateData(c)}
+              >
+                {c}
+              </Dropdown.Item>
+            );
+          })}
+        </DropdownButton>
         <Line
           data={this.state.data}
           options={{
@@ -43,7 +80,7 @@ class Chart extends Component {
               display: false,
               position: "left"
             },
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             scales: {
               xAxes: [
                 {
