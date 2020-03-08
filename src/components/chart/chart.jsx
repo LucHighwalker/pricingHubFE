@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./chart.scss";
 
-import { Line } from "react-chartjs-2";
+import { Chart as ChartJS, Line } from "react-chartjs-2";
 import { DropdownButton, Dropdown } from "react-bootstrap";
+import "chartjs-plugin-zoom";
 
 class Chart extends Component {
   constructor(props) {
@@ -46,6 +47,7 @@ class Chart extends Component {
   componentDidMount() {
     this.updateData(this.state.current);
     this.getCompetitorList();
+    // ChartJS.pluginService.register(Zoom);
   }
 
   render() {
@@ -76,6 +78,14 @@ class Chart extends Component {
           data={this.state.data}
           options={{
             title: { text: "This is a test" },
+            pan: {
+              enabled: true,
+              mode: "xy"
+            },
+            zoom: {
+              enabled: true,
+              mode: "x"
+            },
             legend: {
               display: false,
               position: "left"

@@ -9,3 +9,9 @@
 	z-index: 200;
 	margin-bottom: 20px;
 }
+
+@media (max-width: 536px) {
+	.competitor_selector {
+		top: 140px;
+	}
+}
