@@ -17,6 +17,21 @@ class Chart extends Component {
     };
   }
 
+  hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 4) - hash);
+    }
+    return hash;
+  }
+
+  intToColor(int) {
+    var c = (int & 0x00ffffff).toString(16).toUpperCase();
+
+    const color = "00000".substring(0, 6 - c.length) + c;
+    return `#${color}`;
+  }
+
   getCompetitorList() {
     fetch("http://127.0.0.1:4200/prices/competitor_list/")
       .then(res => {
@@ -39,7 +54,13 @@ class Chart extends Component {
         return res.json();
       })
       .then(res => {
-        data.datasets = res.competitor;
+        data.datasets = res.competitor.map(c => {
+          const color = this.intToColor(this.hashCode(c.label))
+          c.fill = false;
+          c.backgroundColor = color;
+          c.borderColor = color;
+          return c
+        });
         this.setState({ data, current: comp });
       });
   }
@@ -68,6 +89,7 @@ class Chart extends Component {
                 key={i}
                 as="button"
                 onClick={() => this.updateData(c)}
+                style={{ color: this.intToColor(this.hashCode(c)) }}
               >
                 {c}
               </Dropdown.Item>
@@ -80,7 +102,7 @@ class Chart extends Component {
             title: { text: "This is a test" },
             pan: {
               enabled: true,
-              mode: "xy"
+              mode: "x"
             },
             zoom: {
               enabled: true,
