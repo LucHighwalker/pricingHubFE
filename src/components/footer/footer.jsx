@@ -5,7 +5,30 @@ import './footer.scss';
 function Footer(props) {
 	return (
 		<div className="footer">
-			<p>footer works!</p>
+			<ul className="footer_ul">
+				<li className="footer_li header">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+			</ul>
+			<ul className="footer_ul">
+				<li className="footer_li header">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+			</ul>
+			<ul className="footer_ul">
+				<li className="footer_li header">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+			</ul>
+			<ul className="footer_ul">
+				<li className="footer_li header">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+				<li className="footer_li">Something</li>
+			</ul>
 		</div>
 	);
 }
