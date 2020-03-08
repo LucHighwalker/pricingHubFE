@@ -40,7 +40,7 @@ class Chart extends Component {
             title: { text: "This is a test" },
             legend: {
               display: true,
-              position: "right"
+              position: "bottom"
             },
             scales: {
               xAxes: [
