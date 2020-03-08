@@ -1,0 +1,42 @@
+.title {
+	display: block;
+	position: fixed;
+	padding: 5px;
+	background-color: darkslategrey;
+	color: white;
+	height: 60px;
+	width: 100%;
+	margin-top: -120px;
+	box-shadow: dimgray 0px 0px 8px;
+	text-align: left;
+}
+
+.title_image {
+	float: left;
+	left: 0;
+	top: 0;
+}
+
+ul {
+	float: left;
+	list-style-type: none;
+}
+
+li {
+	padding: 5px;
+	float: left;
+}
+
+a {
+	transition: all ease 0.5s;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	text-decoration: underline;
+	text-decoration-color: darkslategrey;
+}
+
+a:hover {
+	color: #ff4100;
+	text-decoration-color: #ff4100;
+}
