@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import "./title.scss";
 
 function Title(props) {
@@ -8,13 +10,13 @@ function Title(props) {
       <img src="/logo_light_sm.png" alt="" className="title_image" />
       <ul className="title_buttons">
         <li>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="/prices">Prices</a>
+          <Link to="/prices">Prices</Link>
         </li>
         <li>
-          <a href="/competitors">Competitors</a>
+          <Link to="/competitors">Competitors</Link>
         </li>
       </ul>
     </div>

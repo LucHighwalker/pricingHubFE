@@ -9,6 +9,7 @@ class Chart extends Component {
     super(props);
 
     this.state = {
+      current: "",
       data: {}
     };
   }
@@ -39,9 +40,10 @@ class Chart extends Component {
           options={{
             title: { text: "This is a test" },
             legend: {
-              display: true,
-              position: "bottom"
+              display: false,
+              position: "left"
             },
+            maintainAspectRatio: false,
             scales: {
               xAxes: [
                 {
