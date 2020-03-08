@@ -11,8 +11,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Title />
         <div className="App_container">
-          <Title />
           <Chart />
         </div>
         <Footer />
