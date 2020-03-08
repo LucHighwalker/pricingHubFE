@@ -40,3 +40,10 @@ a:hover {
 	color: #ff4100;
 	text-decoration-color: #ff4100;
 }
+
+@media (max-width: 525px) {
+	.title {
+		height: 120px;
+		margin-top: -200px;
+	}
+}
