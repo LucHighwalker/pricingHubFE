@@ -10,6 +10,23 @@
 	margin-bottom: 20px;
 }
 
+.CalendarDay__hovered {
+	background: #ff4100;
+  color: white;
+}
+
+// Will edit selected date or the endpoints of a range of dates
+.CalendarDay__selected {
+  background: #ff4100;
+  color: white;
+}
+
+// Will edit when hovered over. _span style also has this property
+.CalendarDay__selected:hover {
+  background: #ff875f;
+  color: white;
+}
+
 @media (max-width: 536px) {
 	.competitor_selector {
 		top: 140px;

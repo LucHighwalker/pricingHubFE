@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./chart.scss";
 
-import { Chart as ChartJS, Line } from "react-chartjs-2";
-import { DropdownButton, Dropdown } from "react-bootstrap";
+import { Line } from "react-chartjs-2";
+import { DropdownButton, Dropdown, Form, Button } from "react-bootstrap";
+import { SingleDatePicker } from "react-dates";
 import "chartjs-plugin-zoom";
 
 class Chart extends Component {
@@ -12,6 +13,8 @@ class Chart extends Component {
 
     this.state = {
       current: "",
+      date: null,
+      price: 0.0,
       data: {},
       competitors: []
     };
@@ -30,6 +33,11 @@ class Chart extends Component {
 
     const color = "00000".substring(0, 6 - c.length) + c;
     return `#${color}`;
+  }
+
+  addPrice() {
+    console.log("date: ", this.state.date);
+    console.log("price: ", this.state.price);
   }
 
   getCompetitorList() {
@@ -55,11 +63,11 @@ class Chart extends Component {
       })
       .then(res => {
         data.datasets = res.competitor.map(c => {
-          const color = this.intToColor(this.hashCode(c.label))
+          const color = this.intToColor(this.hashCode(c.label));
           c.fill = false;
           c.backgroundColor = color;
           c.borderColor = color;
-          return c
+          return c;
         });
         this.setState({ data, current: comp });
       });
@@ -135,6 +143,30 @@ class Chart extends Component {
             }
           }}
         />
+        {this.state.current !== "" ? (
+          <Form className="price_form">
+            <h1>Add Price</h1>
+            <SingleDatePicker
+              date={this.state.date}
+              onDateChange={date => this.setState({ date })}
+              focused={this.state.focused}
+              onFocusChange={({ focused }) => this.setState({ focused })}
+              id="date"
+            />
+            <Form.Group>
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="number"
+                step="0.01"
+                placeholder="Price"
+                onChange={e => this.setState({ price: e.target.value })}
+              />
+            </Form.Group>
+            <Button variant="primary" disabled={this.state.date === null || this.state.price <= 0} onClick={() => this.addPrice()}>
+              Submit
+            </Button>
+          </Form>
+        ) : null}
       </div>
     );
   }
