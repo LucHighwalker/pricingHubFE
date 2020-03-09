@@ -23,12 +23,6 @@ function Footer(props) {
 				<li className="footer_li">Something</li>
 				<li className="footer_li">Something</li>
 			</ul>
-			<ul className="footer_ul">
-				<li className="footer_li header">Something</li>
-				<li className="footer_li">Something</li>
-				<li className="footer_li">Something</li>
-				<li className="footer_li">Something</li>
-			</ul>
 			<ul className="footer_ul_img">
 				<li className="footer_li_img"><img src="facebook.png" alt="facebook"/></li>
 				<li className="footer_li_img"><img src="twitter.png" alt="twitter"/></li>

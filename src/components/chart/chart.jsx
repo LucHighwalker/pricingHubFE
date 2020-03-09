@@ -36,8 +36,19 @@ class Chart extends Component {
   }
 
   addPrice() {
-    console.log("date: ", this.state.date);
-    console.log("price: ", this.state.price);
+    fetch(`http://127.0.0.1:4200/prices/competitor/${this.state.current}`, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        date: this.state.date.format("YYYY-MM-DD"),
+        price: this.state.price
+      })
+    }).then(() => {
+      this.updateData(this.state.current);
+    });
   }
 
   getCompetitorList() {
@@ -106,6 +117,8 @@ class Chart extends Component {
         </DropdownButton>
         <Line
           data={this.state.data}
+          width={100}
+          height={150}
           options={{
             title: { text: "This is a test" },
             pan: {
@@ -120,7 +133,7 @@ class Chart extends Component {
               display: false,
               position: "left"
             },
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             scales: {
               xAxes: [
                 {
@@ -146,23 +159,31 @@ class Chart extends Component {
         {this.state.current !== "" ? (
           <Form className="price_form">
             <h1>Add Price</h1>
-            <SingleDatePicker
-              date={this.state.date}
-              onDateChange={date => this.setState({ date })}
-              focused={this.state.focused}
-              onFocusChange={({ focused }) => this.setState({ focused })}
-              id="date"
-            />
             <Form.Group>
-              <Form.Label>Price</Form.Label>
+              <Form.Label>Date: </Form.Label>
+              <SingleDatePicker
+                date={this.state.date}
+                onDateChange={date => this.setState({ date })}
+                focused={this.state.focused}
+                onFocusChange={({ focused }) => this.setState({ focused })}
+                id="date"
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Price: </Form.Label>
               <Form.Control
+                className="price_field"
                 type="number"
                 step="0.01"
                 placeholder="Price"
                 onChange={e => this.setState({ price: e.target.value })}
               />
             </Form.Group>
-            <Button variant="primary" disabled={this.state.date === null || this.state.price <= 0} onClick={() => this.addPrice()}>
+            <Button
+              variant="primary"
+              disabled={this.state.date === null || this.state.price <= 0}
+              onClick={() => this.addPrice()}
+            >
               Submit
             </Button>
           </Form>

@@ -1,6 +1,5 @@
 .chart {
 	padding: 50px;
-	min-height: 500px;
 }
 
 .competitor_selector {
@@ -8,6 +7,17 @@
 	top: 75px;
 	z-index: 200;
 	margin-bottom: 20px;
+}
+
+.price_form {
+	display: inline-block;
+	width: 100%;
+}
+
+.price_field {
+	display: inline-block;
+	max-width: 132px;
+	border-radius: 1px;
 }
 
 .CalendarDay__hovered {
